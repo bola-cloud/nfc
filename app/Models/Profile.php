@@ -4,12 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\Contracts\Auditable;
 
 class Profile extends Model
 {
     use HasFactory;
-    use \OwenIt\Auditing\Auditable;
 
     protected $fillable = ['user_id', 'bio', 'website', 'profile_image', 'company', 'job_title'];
 
@@ -21,5 +19,11 @@ class Profile extends Model
     public function links()
     {
         return $this->hasMany(ProfileLink::class);
+    }
+
+    // Accessor to get the full URL of the profile image
+    public function getProfileImageUrlAttribute()
+    {
+        return $this->profile_image ? asset('storage/' . $this->profile_image) : null;
     }
 }

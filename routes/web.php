@@ -19,16 +19,15 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 // });
 
 Route::group([
-    'prefix' => LaravelLocalization::setLocale(), // Set the language prefix correctly
+    'prefix' => LaravelLocalization::setLocale(),
     'middleware' => [
         'auth:sanctum',
         config('jetstream.auth_session'),
         'verified',
     ],
-    'as' => "admin.", // Use 'as' instead of 'name'
-    'namespace'=>'\App\Http\Controllers\Admin',
+    'as' => 'admin.',
 ], function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     Route::resource('subscription_plans', SubscriptionPlanController::class);
     Route::resource('users', UserController::class);
     Route::resource('profiles', ProfileController::class);
@@ -37,5 +36,5 @@ Route::group([
     Route::resource('analytics', AnalyticsController::class)->only(['index', 'show', 'destroy']);
     Route::resource('profile_links', ProfileLinkController::class);
     Route::resource('audit_logs', AuditLogController::class)->only(['index', 'show']);
-
+    
 });
