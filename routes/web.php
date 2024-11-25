@@ -25,7 +25,7 @@ Route::group([
         config('jetstream.auth_session'),
         'verified',
     ],
-    'as' => 'admin.',
+    // 'as' => 'admin.',
 ], function () {
     Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     Route::resource('subscription_plans', SubscriptionPlanController::class);
@@ -36,5 +36,6 @@ Route::group([
     Route::resource('analytics', AnalyticsController::class)->only(['index', 'show', 'destroy']);
     Route::resource('profile_links', ProfileLinkController::class);
     Route::resource('audit_logs', AuditLogController::class)->only(['index', 'show']);
-    
+    Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
+
 });

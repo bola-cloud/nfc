@@ -78,7 +78,7 @@
                 <ul class="nav navbar-nav flex-row">
                     <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
                     <li class="nav-item d-flex align-items-center">
-                        <a class="navbar-brand p-0" href="{{route('admin.dashboard')}}">
+                        <a class="navbar-brand p-0" href="{{route('dashboard')}}">
                           <img class="brand-logo" alt="modern admin logo" src="{{asset('app-assets/images/logo/download.png')}}"
                           style="height: 80px; width: 90px;">
                           <h3 class="brand-text">NFC </h3>
@@ -141,8 +141,8 @@
             <div class="main-menu menu-static menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
                 <div class="main-menu-content">
                     <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                        <li class="nav-item {{ Route::currentRouteName() == 'admin.dashboard' ? 'active' : '' }}">
-                            <a href="{{ route('admin.dashboard') }}">
+                        <li class="nav-item {{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}">
+                            <a href="{{ route('dashboard') }}">
                                 <i class="la la-share-alt"></i>
                                 <span class="menu-title" data-i18n="nav.morris_charts.main">{{ __('lang.dashboard') }}</span>
                             </a>

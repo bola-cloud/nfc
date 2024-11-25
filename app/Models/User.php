@@ -48,7 +48,11 @@ class User extends Authenticatable
     {
         return $this->belongsTo(SubscriptionPlan::class,'subscription_plan_id');
     }
-
+    
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

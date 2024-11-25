@@ -7,6 +7,7 @@ use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage; 
+use Endroid\QrCode\Builder\Builder;
 
 class ProfileController extends Controller
 {
@@ -75,6 +76,37 @@ class ProfileController extends Controller
             'message' => 'Profile updated successfully',
             'status' => true,
             'data' => $profile,
+        ], 200);
+    }
+    
+    public function generateQrCode($id)
+    {
+        // Find the profile by ID
+        $profile = Auth::user()->profile()->where('id', $id)->first();
+
+        if (!$profile) {
+            return response()->json([
+                'message' => 'Profile not found.',
+                'status' => false,
+            ], 404);
+        }
+
+        // Generate a sharable link for the profile
+        $profileUrl = route('profile.show', ['id' => $profile->id]);
+
+        // Generate the QR code as an image
+        $qrCode = Builder::create()
+            ->data($profileUrl)
+            ->size(300)
+            ->margin(10)
+            ->build();
+
+        // Return the QR code as a base64-encoded image
+        return response()->json([
+            'message' => 'QR code generated successfully.',
+            'status' => true,
+            'qr_code' => 'data:image/png;base64,' . base64_encode($qrCode->getString()),
+            'profile_url' => $profileUrl,
         ], 200);
     }
 }
