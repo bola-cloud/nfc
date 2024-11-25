@@ -39,3 +39,4 @@ Route::group([
     Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
 
 });
+Route::get('/scanned/profile/{slug}', [App\Http\Controllers\ProfilePageController::class, 'show'])->name('profile.show');

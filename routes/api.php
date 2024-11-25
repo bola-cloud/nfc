@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ProfileLinkController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ContactController;
+use App\Http\Controllers\Api\ProfilePageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('profile', [ProfileController::class, 'show']);
     Route::get('/profile/qr/{id}', [ProfileController::class, 'generateQrCode']);
+    Route::get('/profile/{id}/share', [ProfileController::class, 'shareProfile'])->name('profile.share');
     Route::post('/add/profile', [ProfileController::class, 'update']);
     Route::get('/profile-links', [ProfileLinkController::class, 'getLinks']);
     // Add a new link for the authenticated user

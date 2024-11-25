@@ -91,8 +91,8 @@ class ProfileController extends Controller
             ], 404);
         }
     
-        // Generate a sharable link for the profile
-        $profileUrl = route('profile.show', ['id' => $profile->id]);
+        // Generate a sharable link for the profile using the slug
+        $profileUrl = route('profile.show', ['slug' => $profile->slug]);
     
         // Generate the QR code as an image
         $qrCode = Builder::create()
@@ -109,4 +109,26 @@ class ProfileController extends Controller
             'profile_url' => $profileUrl,
         ], 200);
     }
+    
+
+    public function shareProfile($id)
+    {
+        $profile = Auth::user()->profile()->where('id', $id)->first();
+    
+        if (!$profile) {
+            return response()->json([
+                'message' => 'Profile not found.',
+                'status' => false,
+            ], 404);
+        }
+    
+        // Generate a sharable link using the slug
+        $profileUrl = route('profile.show', ['slug' => $profile->slug]);
+    
+        return response()->json([
+            'message' => 'Profile link generated successfully.',
+            'status' => true,
+            'profile_url' => $profileUrl,
+        ], 200);
+    }    
 }
