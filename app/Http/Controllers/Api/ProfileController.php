@@ -83,25 +83,25 @@ class ProfileController extends Controller
     {
         // Find the profile by ID
         $profile = Auth::user()->profile()->where('id', $id)->first();
-
+    
         if (!$profile) {
             return response()->json([
                 'message' => 'Profile not found.',
                 'status' => false,
             ], 404);
         }
-
+    
         // Generate a sharable link for the profile
         $profileUrl = route('profile.show', ['id' => $profile->id]);
-
+    
         // Generate the QR code as an image
         $qrCode = Builder::create()
             ->data($profileUrl)
             ->size(300)
             ->margin(10)
             ->build();
-
-        // Return the QR code as a base64-encoded image
+    
+        // Return the QR code as a Base64-encoded image
         return response()->json([
             'message' => 'QR code generated successfully.',
             'status' => true,
