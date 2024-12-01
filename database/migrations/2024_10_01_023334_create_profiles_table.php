@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');  // Foreign key to users table
             $table->text('bio')->nullable();      // User bio or short description
             $table->string('website')->nullable();  // Main website URL
             $table->string('profile_image')->nullable();  // Profile picture (image path)
